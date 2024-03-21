@@ -15,12 +15,12 @@ public class OrderCardTest {
     void validAmountTest() {
 
         open("http://localhost:9999/");
-        SelenideElement form = $("[form-action=]");
+        SelenideElement form = $("[id=root]");
         form.$("[data-test-id=name] input").setValue("Слава");
-        form.$("[data-test-id=phone] input").setValue("89999999999");
+        form.$("[data-test-id=phone] input").setValue("+79999999999");
         form.$("[data-test-id=agreement]").click();
-        $(".alert-success").shouldHave(Condition.exactText("  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
-
+        form.$("button.button").click();
+        $("[data-test-id=order-success]").shouldHave(Condition.exactText("  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
 
     }
 }
